@@ -5,12 +5,12 @@ import { ProfilPage } from '../profil/profil.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'tabs/tab1',
     component: Tab1Page 
   },
   {
     path: '',
-    component: ProfilPage
+    component: Tab1Page
   }
 ];
 

@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large"></ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -20,9 +20,9 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-card color="secondary">
+        <ion-card color="primary">
           <ion-card-header>
-            <ion-card-title>Mes dépenses</ion-card-title>
+            <ion-card-title>Mes Dépenses</ion-card-title>
             <ion-card-subtitle></ion-card-subtitle>
           </ion-card-header>
        
@@ -32,10 +32,10 @@
     </ion-row>
     <ion-row>
     <ion-col>
-  <ion-card color="primary" routerLink="/medecin">
+  <ion-card class="couleur2" routerLink="/medecin">
     <ion-card-header>
-      <ion-card-title>Mes médecins</ion-card-title>
-      <ion-card-subtitle>Retrouvez la liste de vos medecins</ion-card-subtitle>
+      <ion-card-title>Mes Médecins</ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
   
     <ion-card-content>  </ion-card-content>
@@ -44,39 +44,55 @@
 
 
 <ion-col>
-  <ion-card color="secondary" routerLink="/document">
+  <ion-card class="couleur3" routerLink="/document">
     <ion-card-header>
-      <ion-card-title>Mes documents</ion-card-title>
-      <ion-card-subtitle>Retrouvez la liste de vos documents medicals</ion-card-subtitle>
+      <ion-card-title>Mes Documents</ion-card-title>
+      <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
  
-    
+    <ion-card-content> </ion-card-content>
   </ion-card>
 </ion-col>
 </ion-row>
 
 <ion-row>
   <ion-col>
-  <ion-card color="tertiary" routerLink="/medicament">
+  <ion-card class="couleur4" routerLink="/medicament">
     <ion-card-header>
       <ion-card-title >Mes Médicaments</ion-card-title>
-      <ion-card-subtitle>Ayez unz vue simplifiée de vos médicaments</ion-card-subtitle>
+      <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
   
-   
+    <ion-card-content> </ion-card-content>
   </ion-card>
 </ion-col>
 <ion-col>
-  <ion-card color="success">
+  <ion-card class="couleur5">
     <ion-card-header>
       <ion-card-title>Card Title</ion-card-title>
-      <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+      <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
-  
+    <ion-card-content></ion-card-content>
     
   </ion-card>
 </ion-col>
 </ion-row>
 </ion-grid>
-  
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon name="home-outline" routerLink="/tabs/tab1"></ion-icon>
+      Home
+    </ion-tab-button>
+    <ion-tab-button tab="radio">
+      <ion-icon name="calendar-outline" routerLink="/tabs/tab2"></ion-icon>
+      Rendez-vous
+    </ion-tab-button>
+    <ion-tab-button tab="search">
+      <ion-icon name="pin-outline" routerLink="/tabs/tab3"></ion-icon>
+      A remplir
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
 </ion-content>

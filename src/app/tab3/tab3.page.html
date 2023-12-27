@@ -15,6 +15,21 @@
       <ion-title size="large">Tab 3</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline" routerLink="/tabs/tab1"></ion-icon>
+        Home
+      </ion-tab-button>
+      <ion-tab-button tab="radio">
+        <ion-icon name="calendar-outline" routerLink="/tabs/tab2"></ion-icon>
+        Rendez-vous
+      </ion-tab-button>
+      <ion-tab-button tab="search">
+        <ion-icon name="pin-outline" routerLink="/tabs/tab3"></ion-icon>
+        A remplir
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+ 
 </ion-content>

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+
+
 const routes: Routes = [
   {
     path: 'home',
@@ -15,7 +17,19 @@ const routes: Routes = [
     children: [
       
       {
-        path: '',
+        path: 'tab1',
+        loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
+      },
+      {
+        path: 'tab2',
+        loadChildren: () => import('./tab2/tab2.module').then(m => m.Tab2PageModule)
+      },
+      {
+        path: 'tab3',
+        loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
+      },
+      {
+        path: '', // Redirige vers tab1 par défaut si aucun onglet spécifié
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
       }
@@ -49,6 +63,14 @@ const routes: Routes = [
     path: 'medicament',
     loadChildren: () => import('./medicament/medicament.module').then( m => m.MedicamentPageModule)
   },
+  {
+    path: 'ajout-medecin',
+    loadChildren: () => import('./ajout-medecin/ajout-medecin.module').then( m => m.AjoutMedecinPageModule)
+  },
+  {
+    path: 'recherche-medecin',
+    loadChildren: () => import('./recherche-medecin/recherche-medecin.module').then( m => m.RechercheMedecinPageModule)
+  },
 ];
 @NgModule({
   imports: [
@@ -57,3 +79,8 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {}
+
+
+
+
+

@@ -18,22 +18,26 @@
           <br><br><br><br><br><br>
           <div class="form">
             <ion-item>
-              <ion-input placeholder="Enter email" type="email">
+              <ion-input placeholder="Enter email" type="email" [(ngModel)]="email">
+
                 <ion-icon name="mail-outline">
                 </ion-icon>
               </ion-input>
             </ion-item>
             <br>
+            <form>
             <ion-item>
-              <ion-input placeholder="Enter password" type="password">
+              <ion-input placeholder="Enter password" type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+
                 <ion-icon name="lock-closed-outline"></ion-icon>
               </ion-input>
             </ion-item>
+          </form>
             <br>
           </div>
           <div>
             
-            <ion-button routerLink="/tabs/tab1" size="large" expand="block" shape="round">Login</ion-button>
+            <ion-button (click)="loginUser()" size="large" expand="block" shape="round">Login</ion-button>
             <ion-button routerLink="/forgotpass" fill="clear">
               Forgot Password
             </ion-button>

@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Recherche Medecin</ion-title>
+    <ion-button slot="start" routerLink="/tabs/tab2">
+      Retour
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+  <ion-item class="entier">
+    <ion-icon name="search-outline"></ion-icon>
+    <ion-input placeholder="&nbsp;spécialité" type="text" name="specialite">
+      
+    </ion-input>
+  </ion-item>
+</ion-col>
+<ion-col>
+  <ion-item class="entier">
+    <ion-icon name="location-outline"></ion-icon> 
+    <ion-input placeholder="&nbsp;ou " type="text" name="localisation"></ion-input>
+    
+  </ion-item>
+</ion-col>
+</ion-row>
+</ion-grid>
+
+  <p>dans ce champs s'affichera la liste des medecins
+  </p>
+</ion-content>

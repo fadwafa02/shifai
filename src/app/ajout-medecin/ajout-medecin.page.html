@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>ajout-medecin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">ajout-medecin</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <div class="ion-text-center">
+    <br><br><br><br>
+    <h4>Ajouter un médecin</h4>
+  </div><br><br><br><br>
+  <div class="form">
+    <ion-item>
+      <ion-input placeholder="Enter user name" type="text" >
+        <ion-icon name="person-outline"></ion-icon>
+      </ion-input>
+    </ion-item><br>
+    <ion-item>
+      <ion-input placeholder="Enter email" type="email">
+        <ion-icon name="mail-outline"></ion-icon>
+      </ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+    <ion-input placeholder="Enter password" type="password">
+      <ion-icon name="lock-closed-outline"></ion-icon></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-input placeholder="Enter date" type="date">
+        </ion-input>
+      </ion-item>
+      <br>
+  </div>
+  <div>
+    <ion-radio-group value="custom-checked">
+      <ion-radio value="custom-checked"></ion-radio>
+      <ion-label>Femme</ion-label>
+      <ion-radio></ion-radio>
+      <ion-label>Homme</ion-label>
+    </ion-radio-group>
+  </div>
+  <br>
+      <div padding>
+        <ion-button size="large" expand="block">Enregistrer
+
+        </ion-button>
+      </div>
+</ion-content>
