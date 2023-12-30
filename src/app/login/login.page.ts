@@ -22,7 +22,7 @@ export class LoginPage implements OnInit {
     try {
       const success = await loginUser(this.email, this.password);
       if (success) {
-        this.navCtrl.navigateForward('tabs/tab2');
+        this.navCtrl.navigateForward('tabs/tab1');
       } else {
         // Gérez les erreurs d'authentification ici (par exemple, affichez un message à l'utilisateur)
       }
