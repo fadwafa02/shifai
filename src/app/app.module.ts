@@ -16,10 +16,12 @@ import { AngularFireModule } from '@angular/fire/compat';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    FormsModule,  // Ajout de FormsModule ici
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
+ 
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

@@ -2,6 +2,7 @@
 import { initializeApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';  // Importez les modules auth nécessaires
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -23,8 +24,6 @@ const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 
 export async function loginUser(email: string, password: string) {
-
-
   try {
     const res = await signInWithEmailAndPassword(auth, email, password);
     console.log(res);
@@ -33,4 +32,19 @@ export async function loginUser(email: string, password: string) {
     console.error(error);
     return false;
   }
+}
+
+// Obtenez une instance d'AngularFirestore avec les options par défaut
+export const firestore = new AngularFirestore(
+  app,
+  'default',  // Nom de la base de données (peut être null pour la base de données par défaut)
+  null,       // Authentification (peut être null si vous n'en avez pas besoin pour l'instant)
+  null,       // Paramètres de persistance (peut être null pour utiliser les paramètres par défaut)
+);
+
+export async function addMedicament(medicament: any) {
+  if (medicament) {
+    return firestore.collection('medicaments').add(medicament);
+  }
+  return Promise.reject('Invalid medicament data');
 }

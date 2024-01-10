@@ -1,0 +1,38 @@
+
+<!-- medicament-form.page.html -->
+
+<ion-header>
+<ion-toolbar>
+<ion-title>Ajouter un Médicament</ion-title>
+</ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+
+
+<form (ngSubmit)="onSubmit()">
+  <ion-item>
+    <ion-label position="floating">Nom du Médicament</ion-label>
+    <ion-input [(ngModel)]="medicament.nom" name="nom" type="text" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Dosage</ion-label>
+    <ion-input [(ngModel)]="medicament.dosage" name="dosage" type="number" required></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Fréquence</ion-label>
+    <ion-checkbox [(ngModel)]="medicament.frequence[0]"></ion-checkbox>
+    <ion-label>Matin</ion-label>
+    <ion-checkbox [(ngModel)]="medicament.frequence[1]"></ion-checkbox>
+    <ion-label>Midi</ion-label>
+    <ion-checkbox [(ngModel)]="medicament.frequence[2]"></ion-checkbox>
+    <ion-label>Soir</ion-label>
+  </ion-item>
+
+  <ion-button type="submit" expand="full">Ajouter</ion-button>
+</form>
+
+</ion-content>
