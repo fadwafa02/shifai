@@ -5,7 +5,8 @@ import { getAuth, signInWithEmailAndPassword, Auth } from 'firebase/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { NgZone } from '@angular/core';
-import { ɵAngularFireSchedulers } from '@angular/fire/compat';
+import { ɵAngularFireSchedulers } from '@angular/fire';
+
 
 // Configuration Firebase
 const firebaseConfig: FirebaseOptions = {
@@ -23,6 +24,7 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
 // Objet d'authentification pour être utilisé dans d'autres fichiers
+
 export const auth: Auth = getAuth(app);
 
 // Fonction pour connecter l'utilisateur
@@ -45,9 +47,10 @@ const ngZone = new NgZone({});
 
 // Définition des planificateurs pour AngularFire
 const schedulers: ɵAngularFireSchedulers = {
-  keepUnstableUntilFirst: () => ngZone.runOutsideAngular(() => new Promise<void>(() => {})),
-  outsideAngular: ngZone.runOutsideAngular.bind(ngZone),
+  keepUnstableUntilFirst: <T>(fn: () => Promise<T>) => ngZone.runOutsideAngular(fn),
+  outsideAngular: <T>(fn: (...args: any[]) => T) => ngZone.runOutsideAngular(() => fn()),
 };
+
 
 // Instance d'AngularFirestore avec les options par défaut
 export const firestore = new AngularFirestore(
