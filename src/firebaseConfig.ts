@@ -1,12 +1,14 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from 'firebase/app';
+// Import des modules nécessaires
+import { initializeApp, FirebaseOptions } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';  // Importez les modules auth nécessaires
+import { getAuth, signInWithEmailAndPassword, Auth } from 'firebase/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { NgZone } from '@angular/core';
+import { ɵAngularFireSchedulers } from '@angular/fire/compat';
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+// Configuration Firebase
+const firebaseConfig: FirebaseOptions = {
   apiKey: 'AIzaSyA7iKnEnxTdm9UdRnegNamwRDsLFESDk7s',
   authDomain: 'shifai-f46a0.firebaseapp.com',
   projectId: 'shifai-f46a0',
@@ -16,13 +18,14 @@ const firebaseConfig = {
   measurementId: 'G-860KGY1PJL',
 };
 
-// Initialize Firebase
+// Initialisation Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
-// Exportez l'objet auth pour être utilisé dans d'autres fichiers
-export const auth = getAuth(app);
+// Objet d'authentification pour être utilisé dans d'autres fichiers
+export const auth: Auth = getAuth(app);
 
+// Fonction pour connecter l'utilisateur
 export async function loginUser(email: string, password: string) {
   try {
     const res = await signInWithEmailAndPassword(auth, email, password);
@@ -34,14 +37,40 @@ export async function loginUser(email: string, password: string) {
   }
 }
 
-// Obtenez une instance d'AngularFirestore avec les options par défaut
+// Nom de la base de données
+const databaseName = 'medicament';
+
+// Instance de NgZone
+const ngZone = new NgZone({});
+
+// Définition des planificateurs pour AngularFire
+const schedulers: ɵAngularFireSchedulers = {
+  keepUnstableUntilFirst: () => ngZone.runOutsideAngular(() => new Promise<void>(() => {})),
+  outsideAngular: ngZone.runOutsideAngular.bind(ngZone),
+};
+
+// Instance d'AngularFirestore avec les options par défaut
 export const firestore = new AngularFirestore(
   app,
-  'default',  // Nom de la base de données (peut être null pour la base de données par défaut)
-  null,       // Authentification (peut être null si vous n'en avez pas besoin pour l'instant)
-  null,       // Paramètres de persistance (peut être null pour utiliser les paramètres par défaut)
+  databaseName,
+  false,
+  null,
+  Object,
+  ngZone,
+  schedulers,
+  null,
+  null,
+  auth,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null,
+  null
 );
 
+// Fonction pour ajouter un médicament à la collection
 export async function addMedicament(medicament: any) {
   if (medicament) {
     return firestore.collection('medicaments').add(medicament);
