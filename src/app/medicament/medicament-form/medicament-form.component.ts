@@ -6,8 +6,8 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { addMedicament } from 'src/firebaseConfig'; 
+import { IonicModule, ToastController } from '@ionic/angular';
+import { AddMedicament, app } from  'src/firebaseConfig';
 import { Component, NgModule } from '@angular/core';
 
 
@@ -19,28 +19,35 @@ import { Component, NgModule } from '@angular/core';
 
 export class MedicamentFormComponent {
 
-  medicament: any = {
-    nom: '',
-    dosage: 0,
-    frequence: [false, false, false]
-  };
 
-  constructor(private firestore: AngularFirestore) {}
+    nom= '';
+    dosage= 0;
+    prise= [false, false, false];
 
-  onSubmit() {
-    // Ajouter les données à Firestore en utilisant la méthode dans firebaseConfig
-    addMedicament({
-      nom: this.medicament.nom,
-      dosage: this.medicament.dosage,
-      frequence: this.medicament.frequence,
-    })
-    .then((docRef) => {
-      console.log('Document added with ID: ', docRef.id);
-      // Réinitialiser le formulaire ou effectuer d'autres actions après l'ajout réussi
-    })
-    .catch((error) => {
-      console.error('Error adding document: ', error);
+
+  constructor(private firestore: AngularFirestore, private toastController: ToastController) {}
+
+  async presentToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 3000,
+      position: 'bottom',
     });
+    toast.present();
+  }
+
+  async addMedicament() {
+    try {
+      // Utilisez la fonction addMedicament avec les paramètres du formulaire
+      AddMedicament(this.firestore, app, this.nom, this.dosage, this.prise);
+      this.presentToast('Médicament ajouté avec succès!');
+      // Réinitialisez les valeurs du formulaire après l'ajout réussi
+      this.nom = '';
+      this.dosage = 0;
+      this.prise = [false, false, false];
+    } catch (error) {
+      console.log('Erreur lors de l\'ajout du médicament:', error);
+    }
   }
 }
 

@@ -17,42 +17,46 @@
         <h4>Register Form</h4>
       </div><br><br><br><br>
       <div class="form">
+        <form>
         <ion-item>
-          <ion-input placeholder="Enter your family name" type="text"  name="familyName">
+          <ion-input [(ngModel)]="familyName" placeholder="Enter your family name" type="text"  name="familyName">
             <ion-icon name="person-outline"></ion-icon>
           </ion-input>
         </ion-item><br>
         <ion-item>
-          <ion-input placeholder="Enter your name" type="text"  name="name">
+          <ion-input [(ngModel)]="name" placeholder="Enter your name" type="text"  name="name">
             <ion-icon name="person-outline"></ion-icon>
           </ion-input>
         </ion-item><br>
         <ion-item>
-          <ion-input placeholder="Enter email" type="email"  name="email">
+          <ion-input [(ngModel)]="email" placeholder="Enter email" type="email"  name="email">
             <ion-icon name="mail-outline"></ion-icon>
           </ion-input>
         </ion-item>
         <br>
         <ion-item>
-        <ion-input placeholder="Enter password" type="password"  name="password">
+        <ion-input [(ngModel)]="password" placeholder="Enter password" type="password" spellcheck="false" name="password">
           <ion-icon name="lock-closed-outline"></ion-icon></ion-input>
         </ion-item>
         <br>
         <ion-item>
-          <ion-input placeholder="Enter date" type="date"  name="date">
+          <ion-input [(ngModel)]="date" placeholder="Enter date" type="date"  name="date">
             </ion-input>
           </ion-item>
           <br>
+        </form>
       </div>
       <label>
-        <input type="radio"  name="sexe" value="Masculin"> Masculin
+        <input type="radio" [(ngModel)]="sexe"  name="sexe" value="Masculin"> Masculin
       </label>
       <label>
-        <input type="radio"  name="sexe" value="Féminin"> Féminin
+        <input type="radio" [(ngModel)]="sexe"  name="sexe" value="Féminin"> Féminin
       </label>
       <br>
       <div padding>
-        <ion-button size="large" expand="block"  >Register</ion-button>
+        <br><br><br><br>
+        
+        <ion-button size="large" expand="block" (click)="AddUser()" >Register</ion-button>
       </div>
      </ion-col>
     </ion-row>

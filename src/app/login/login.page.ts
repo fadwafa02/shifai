@@ -31,7 +31,9 @@ export class LoginPage implements OnInit {
       // Affichez un message à l'utilisateur pour l'informer de l'erreur
     }
   }
-  
+  back() {
+    this.navCtrl.navigateForward('/home');
+  }
 
   ngOnInit() {
   }
