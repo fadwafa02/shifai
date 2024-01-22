@@ -27,14 +27,14 @@ const routes: Routes = [
       {
         path: 'tab3',
         loadChildren: () => import('./tab3/tab3.module').then(m => m.Tab3PageModule)
-      },
-      {
-        path: '', // Redirige vers tab1 par défaut si aucun onglet spécifié
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
       }
     ]
   },
+  {
+    path: '',
+    redirectTo: '/home', // Redirige vers la page home
+    pathMatch: 'full'
+  },  
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)

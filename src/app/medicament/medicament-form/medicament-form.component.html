@@ -3,6 +3,7 @@
 
 <ion-header>
 <ion-toolbar>
+
 <ion-title>Ajouter un Médicament</ion-title>
 </ion-toolbar>
 </ion-header>
@@ -14,23 +15,26 @@
 <form>
   <ion-item>
     <ion-label position="floating">Nom du Médicament</ion-label>
-    <ion-input [(ngModel)]="nom" name="nom" type="text" required></ion-input>
+    <ion-input [(ngModel)]="nom" name="nom" type="text" required [ngModelOptions]="{standalone: true}"></ion-input>
   </ion-item>
 
   <ion-item>
     <ion-label position="floating">Dosage</ion-label>
-    <ion-input [(ngModel)]="dosage" name="dosage" type="number" required></ion-input>
+    <ion-input [(ngModel)]="dosage" name="dosage" [ngModelOptions]="{standalone: true}" type="number" required></ion-input>
   </ion-item>
 
-  <ion-item>
-    <ion-label>Fréquence</ion-label>
-    <ion-checkbox [(ngModel)]="prise[0]"></ion-checkbox>
-    <ion-label>Matin</ion-label>
-    <ion-checkbox [(ngModel)]="prise[1]"></ion-checkbox>
-    <ion-label>Midi</ion-label>
-    <ion-checkbox [(ngModel)]="prise[2]"></ion-checkbox>
-    <ion-label>Soir</ion-label>
-  </ion-item>
+
+    <ion-item>
+      <ion-label>Fréquence</ion-label>
+      <ion-checkbox [(ngModel)]="prises[0].checked" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+      <ion-label>Matin</ion-label>
+      <ion-checkbox [(ngModel)]="prises[1].checked" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+      <ion-label>Midi</ion-label>
+      <ion-checkbox [(ngModel)]="prises[2].checked" [ngModelOptions]="{standalone: true}"></ion-checkbox>
+      <ion-label>Soir</ion-label>
+    </ion-item>
+    
+
 
   <ion-button type="submit" expand="full" (click)="addMedicament()" >Ajouter</ion-button>
 </form>

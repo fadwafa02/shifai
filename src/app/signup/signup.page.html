@@ -19,7 +19,7 @@
       <div class="form">
         <form>
         <ion-item>
-          <ion-input [(ngModel)]="familyName" placeholder="Enter your family name" type="text"  name="familyName">
+          <ion-input [(ngModel)]="familyName" placeholder="Enter your family name" type="text"  name="familyName" [ngModelOptions]="{standalone: true}">
             <ion-icon name="person-outline"></ion-icon>
           </ion-input>
         </ion-item><br>
