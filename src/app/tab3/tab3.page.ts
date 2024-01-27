@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { userUid } from 'src/app/login/login.page';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
+
+
+  uid: string = userUid ;
+
+  
   constructor() {}
 
 }

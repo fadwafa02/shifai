@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/home', // Redirige vers la page home
+    redirectTo: '/home-principal', // Redirige vers la page home
     pathMatch: 'full'
   },  
   {
@@ -70,6 +70,26 @@ const routes: Routes = [
   {
     path: 'recherche-medecin',
     loadChildren: () => import('./recherche-medecin/recherche-medecin.module').then( m => m.RechercheMedecinPageModule)
+  },
+  {
+    path: 'splash-screen',
+    loadChildren: () => import('./splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
+  },
+  {
+    path: 'home-principal',
+    loadChildren: () => import('./home-principal/home-principal.module').then( m => m.HomePrincipalPageModule)
+  },
+  {
+    path: 'homeindividu',
+    loadChildren: () => import('./homeindividu/homeindividu.module').then( m => m.HomeindividuPageModule)
+  },
+  {
+    path: 'homemedecin',
+    loadChildren: () => import('./homemedecin/homemedecin.module').then( m => m.HomemedecinPageModule)
+  },
+  {
+    path: 'home-avant-compte',
+    loadChildren: () => import('./home-avant-compte/home-avant-compte.module').then( m => m.HomeAvantComptePageModule)
   },
 ];
 @NgModule({

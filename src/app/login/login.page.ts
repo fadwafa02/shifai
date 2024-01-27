@@ -36,6 +36,7 @@ export class LoginPage implements OnInit {
         this.navCtrl.navigateForward('tabs/tab1');
       } else {
         this.presentToast('Identifiants invalides');// Gérez les erreurs d'authentification ici (par exemple, affichez un message à l'utilisateur)
+        console.log('le toast d erreur s affiche ');
       }
     } catch (error) {
       console.log('Error during login:', error);

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { getMedecinsByLocalisationAndSpecialite } from 'src/firebaseConfig';
+import { userUid } from 'src/app/login/login.page';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +10,13 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
+
+  uid: string = userUid ;
+
+  
   constructor() {}
+
+  
+  
 
 }

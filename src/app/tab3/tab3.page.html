@@ -15,21 +15,27 @@
       <ion-title size="large">Tab 3</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="home">
-        <ion-icon name="home-outline" routerLink="/tabs/tab1"></ion-icon>
-        Home
-      </ion-tab-button>
-      <ion-tab-button tab="radio">
-        <ion-icon name="calendar-outline" routerLink="/tabs/tab2"></ion-icon>
-        Rendez-vous
-      </ion-tab-button>
-      <ion-tab-button tab="search">
-        <ion-icon name="pin-outline" routerLink="/tabs/tab3"></ion-icon>
-        A remplir
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+  
  
 </ion-content>
+
+<ion-footer collapse="fade">
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="home">
+          <ion-icon name="home-outline" [routerLink]="uid ? '/tabs/tab1' : '/homeindividu'"></ion-icon>
+          Home
+        </ion-tab-button>
+        <ion-tab-button tab="radio">
+          <ion-icon name="calendar-outline" routerLink="/tabs/tab2"></ion-icon>
+          Rendez-vous
+        </ion-tab-button>
+        <ion-tab-button tab="search">
+          <ion-icon name="pin-outline" routerLink="/tabs/tab3"></ion-icon>
+          A remplir
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

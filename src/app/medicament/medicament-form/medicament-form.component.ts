@@ -10,7 +10,8 @@ import { IonicModule, ModalController, ToastController } from '@ionic/angular';
 import { AddMedicament, app } from  'src/firebaseConfig';
 import { Component, NgModule } from '@angular/core';
 import { userUid } from 'src/app/login/login.page';
-import { getMedicamentsByUid } from 'src/firebaseConfig';
+import { EventService } from 'src/app/event.service';
+
 
 
 
@@ -29,7 +30,7 @@ export class MedicamentFormComponent {
     prises = [{ label: 'Matin', checked: false },{ label: 'Midi', checked: false },{ label: 'Soir', checked: false }];
 
 
-  constructor(private firestore: AngularFirestore, private toastController: ToastController, private modalController: ModalController) {}
+  constructor(private firestore: AngularFirestore, private toastController: ToastController, private modalController: ModalController, private eventService: EventService) {}
 
   async presentToast(message: string) {
     const toast = await this.toastController.create({
@@ -44,6 +45,8 @@ export class MedicamentFormComponent {
     try {
       if (typeof this.uid === 'string') {
       await AddMedicament(this.firestore, app, this.nom, this.dosage, this.prises, this.uid);
+       // Déclencher l'événement de mise à jour des médicaments
+       this.eventService.triggerMedicamentUpdated();
       this.presentToast('Médicament ajouté avec succès!');
       // Réinitialisez les valeurs du formulaire après l'ajout réussi
       this.nom = '';
@@ -64,12 +67,7 @@ export class MedicamentFormComponent {
 
 
 
-  // Utilisez la fonction pour récupérer les médicaments d'un utilisateur
-  async fetchMedicaments() {
-    const medicaments = await getMedicamentsByUid(this.firestore, this.uid);
 
-    console.log('Médicaments de l\'utilisateur :', medicaments);
-  }
 }
 
 @NgModule({

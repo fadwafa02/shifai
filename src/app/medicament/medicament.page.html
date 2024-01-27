@@ -31,4 +31,33 @@
       <ng-container *ngComponentOutlet="medicamentFormComponent"></ng-container>
     </ion-content>
   </ion-modal>
+<!-- Dans votre fichier HTML du composant Angular -->
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th>
+      <th>Dosage</th>
+      <th>Prise</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Utilisez *ngFor pour itérer sur le tableau de médicaments -->
+    <tr *ngFor="let medicament of medicaments">
+      <td>{{ medicament.nom }}</td>
+      <td>{{ medicament.dosage }}</td>
+      <td>
+        <!-- Affichez les prises sous forme de texte (par exemple, "Matin, Midi, Soir") -->
+        {{ medicament.prise.join(', ') }}
+      </td>
+      <td>
+        <!-- Ajoutez des boutons pour la modification et la suppression -->
+        <button (click)="modifierMedicament(medicament)">Modifier</button>
+        <button (click)="supprimerMedicament(medicament.id)">Supprimer</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 </ion-content>

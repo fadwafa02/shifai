@@ -2,12 +2,12 @@
 import { initializeApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signInWithEmailAndPassword, Auth, User, UserCredential } from 'firebase/auth';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { NgZone } from '@angular/core';
 import { ɵAngularFireSchedulers, ɵAppCheckInstances, ɵZoneScheduler } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/compat/auth/auth';
 import { AppCheck } from 'firebase/app-check';
-import { Observable, of } from 'rxjs';
+import { Observable, firstValueFrom, of } from 'rxjs';
 
 
 // Configuration Firebase
@@ -30,11 +30,10 @@ const auth: Auth = getAuth(app);
 
 
 // Fonction pour connecter l'utilisateur
-export async function loginUser(email: string, password: string): Promise<UserCredential> {
+export async function loginUser(email: string, password: string) {
   try {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     console.log('Utilisateur connecté :', userCredential.user);
-
     return userCredential;
   } catch (error) {
     console.error(error);
@@ -107,4 +106,42 @@ export async function getMedicamentsByUid(firestore: AngularFirestore, uid: stri
   }
   
 }
+
+// Exemple d'interface pour la structure des données des médecins
+interface MedecinData {
+  // Définissez les champs nécessaires
+  nom: string;
+  prenom:string;
+  localisation:string;
+  specialite:string;
+  // ... autres champs
+}
+
+
+
+
+export async function getMedecinsByLocalisationAndSpecialite(firestore: AngularFirestore, localisation: string, specialite: string) {
+  try {
+    const snapshot = await firestore.collection('medecins').ref.where('specialite', '==', specialite).where('localisation', '==', localisation).get();
+
+    // Vérifier si snapshot est défini avant de l'utiliser
+    if (snapshot) {
+      // Convertir le snapshot en tableau de médecins
+      const medecins: MedecinData[] = snapshot.docs.map(doc => {
+        const data = doc.data() as MedecinData;
+        return { id: doc.id, ...data };
+      });
+
+      return medecins;
+    } else {
+      console.error('La requête n\'a pas renvoyé de snapshot.');
+      return []; // Ou lancez une erreur appropriée selon vos besoins
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des médecins (firebase) :', error);
+    throw error;
+  }
+}
+
+
 

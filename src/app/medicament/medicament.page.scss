@@ -4,3 +4,63 @@ h1{
 .right {
     float: right;
   }
+
+/* Style pour le tableau */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+    border-radius: 6px; /* Bordures arrondies */
+  }
+  
+  th, td {
+    border: 1px solid #b3d9ff; /* Bordure bleue claire */
+    padding: 12px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #99c2ff; /* Fond bleu moyen pour les entêtes */
+  }
+  
+  /* Style pour les lignes impaires */
+  tr:nth-child(odd) {
+    background-color: #edf5ff; /* Fond bleu très clair pour les lignes impaires */
+  }
+  
+  /* Style pour les boutons */
+  button {
+    background-color: #007bff; /* Bleu vif pour le bouton principal */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 8px 4px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  button:hover {
+    background-color: #0056b3; /* Bleu foncé pour le bouton principal au survol */
+  }
+  .tableau{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+  ion-icon {
+    font-size: 24px;
+    margin-right: 5px;
+  }
+  
+  ion-icon.checked {
+    color: green; /* Couleur verte pour les valeurs true */
+  }
+  
+  ion-icon.unchecked {
+    color: red; /* Couleur rouge pour les valeurs false */
+  }
+    

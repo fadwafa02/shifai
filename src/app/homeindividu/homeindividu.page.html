@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>homeindividu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">homeindividu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <p>je suis individu</p>
+  <ion-button routerLink="/home">
+    se connecter ou bien creer un compte 
+  </ion-button>
+</ion-content>
+<ion-footer collapse="fade">
+  <ion-toolbar>
+  <ion-tabs>
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="home">
+        <ion-icon name="home-outline" routerLink="/home-avant-compte"></ion-icon>
+        Home
+      </ion-tab-button>
+      <ion-tab-button tab="radio">
+        <ion-icon name="calendar-outline" routerLink="/tabs/tab2"></ion-icon>
+        Rendez-vous
+      </ion-tab-button>
+      <ion-tab-button tab="search">
+        <ion-icon name="pin-outline" routerLink="/tabs/tab3"></ion-icon>
+        A remplir
+      </ion-tab-button>
+    </ion-tab-bar>
+  </ion-tabs>
+</ion-toolbar>
+</ion-footer>

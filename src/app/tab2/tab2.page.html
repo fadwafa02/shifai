@@ -17,7 +17,15 @@
         <ion-card color="primary" class="header-rd">
           <ion-card-header>
             <br><br>
-            <ion-card-title class="center">Trouvez un Rendez-vous avec </ion-card-title>
+            <ion-card-title class="center">
+              
+              <div class="center">Trouver</div> 
+              <div> 
+             <span>Tous les spécialistes </span>
+            </div>
+            
+           
+ </ion-card-title>
             <br><br>
             <ion-card-subtitle class="center"></ion-card-subtitle>
           </ion-card-header>
@@ -31,29 +39,33 @@
         
         </ion-card>
 
-        <ion-button class="center1"  color="light" routerLink="/recherche-medecin">
-          <ion-icon name="search-circle-outline" style="color:rgb(110, 110, 248);"></ion-icon>
-          <p style="color:rgb(110, 110, 248);">fgsrry</p>
-        </ion-button> 
+        
       
 <p>dans ce champs s'affichera les differents Rendez-vous a suivre </p>
     </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="home">
-        <ion-icon name="home-outline" routerLink="/tabs/tab1"></ion-icon>
-        Home
-      </ion-tab-button>
-      <ion-tab-button tab="radio">
-        <ion-icon name="calendar-outline" routerLink="/tabs/tab2"></ion-icon>
-        Rendez-vous
-      </ion-tab-button>
-      <ion-tab-button tab="search">
-        <ion-icon name="pin-outline" routerLink="/tabs/tab3"></ion-icon>
-        A remplir
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+  
 </ion-content>
+<ion-footer collapse="fade">
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="home">
+          <ion-icon name="home-outline" [routerLink]="uid ? '/tabs/tab1' : '/homeindividu'"></ion-icon>
+          Home
+        </ion-tab-button>
+        <ion-tab-button tab="radio">
+          <ion-icon name="calendar-outline" routerLink="/tabs/tab2"></ion-icon>
+          Rendez-vous
+        </ion-tab-button>
+        <ion-tab-button tab="search">
+          <ion-icon name="pin-outline" routerLink="/tabs/tab3"></ion-icon>
+          A remplir
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>
+
+
