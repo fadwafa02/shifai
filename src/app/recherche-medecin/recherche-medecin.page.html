@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Recherche Medecin</ion-title>
-    <ion-button slot="start" routerLink="/tabs/tab2">
+    <ion-button slot="start" routerLink="/tabs/tab2" >
       Retour
     </ion-button>
   </ion-toolbar>
@@ -12,27 +12,34 @@
     <ion-row>
       <ion-col>
   <ion-item class="entier">
-    <ion-icon name="search-outline"></ion-icon>
-    <ion-input placeholder="&nbsp;spécialité" type="text" name="specialite" [(ngModel)]="specialite">
+    <ion-icon name="search-outline" class="warning"></ion-icon>
+    <ion-input placeholder="&nbsp;Spécialité" type="text" name="specialite" [(ngModel)]="specialite">
       
     </ion-input>
   </ion-item>
 </ion-col>
 <ion-col>
   <ion-item class="entier">
-    <ion-icon name="location-outline"></ion-icon> 
-    <ion-input placeholder="&nbsp;ou " type="text" name="localisation" [(ngModel)]="localisation"></ion-input>
+    <ion-icon name="location-outline" class="warning"></ion-icon> 
+    <ion-input placeholder="&nbsp;Où " type="text" name="localisation" [(ngModel)]="localisation"></ion-input>
     
   </ion-item>
 </ion-col>
   <ion-col size="auto">
-    <ion-button (click)="fetchMedecins()">
+    <ion-button  color="danger" (click)="fetchMedecins()"  >
       <ion-icon name="search-outline"></ion-icon>
     </ion-button>
   </ion-col>
 </ion-row>
 </ion-grid>
-
-  <p>dans ce champs s'affichera la liste des medecins
-  </p>
+<ion-card *ngFor="let medecin of medecins">
+  <ion-card-header>
+    {{ medecin.nom }} {{ medecin.prenom }}
+  </ion-card-header>
+  <ion-card-content>
+    <p>Localisation: {{ medecin.localisation }}</p>
+    <p>Spécialité: {{ medecin.specialite }}</p>
+    <ion-button (click)="goToAfficheMedecin(medecin.uid)" color="success">Voir détails</ion-button>
+  </ion-card-content>
+</ion-card>
 </ion-content>

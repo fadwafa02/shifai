@@ -91,6 +91,18 @@ const routes: Routes = [
     path: 'home-avant-compte',
     loadChildren: () => import('./home-avant-compte/home-avant-compte.module').then( m => m.HomeAvantComptePageModule)
   },
+  {
+    path: 'affiche-medecin',
+    loadChildren: () => import('./affiche-medecin/affiche-medecin.module').then( m => m.AfficheMedecinPageModule)
+  },
+  {
+    path: 'login-medecin',
+    loadChildren: () => import('./login-medecin/login-medecin.module').then( m => m.LoginMedecinPageModule)
+  },
+  {
+    path: 'signup-medecin',
+    loadChildren: () => import('./signup-medecin/signup-medecin.module').then( m => m.SignupMedecinPageModule)
+  },
 ];
 @NgModule({
   imports: [

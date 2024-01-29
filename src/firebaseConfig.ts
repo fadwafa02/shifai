@@ -7,7 +7,7 @@ import { NgZone } from '@angular/core';
 import { ɵAngularFireSchedulers, ɵAppCheckInstances, ɵZoneScheduler } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/compat/auth/auth';
 import { AppCheck } from 'firebase/app-check';
-import { Observable, firstValueFrom, of } from 'rxjs';
+import { Observable, catchError, firstValueFrom, map, of } from 'rxjs';
 
 
 // Configuration Firebase
@@ -44,7 +44,7 @@ export async function loginUser(email: string, password: string) {
 
 
 
-export async function AddUser(firestore: AngularFirestore, app: FirebaseApp, familyName: string, name: string, email: string, password: string, date: string, sexe: string) {
+export async function AddUser(firestore: AngularFirestore, app: FirebaseApp, familyName: string, name: string, email: string, password: string, date: string, sexe: string, role: string) {
   const user = {
     familyName: familyName,
     name: name,
@@ -52,6 +52,7 @@ export async function AddUser(firestore: AngularFirestore, app: FirebaseApp, fam
     password: password,
     date: date,
     sexe: sexe,
+    role: role,
   };
 
   firestore.collection('inscrits').add(user)
@@ -120,9 +121,9 @@ interface MedecinData {
 
 
 
-export async function getMedecinsByLocalisationAndSpecialite(firestore: AngularFirestore, localisation: string, specialite: string) {
+export async function getMedecinsByLocalisationAndSpecialite(firestore: AngularFirestore, localisation: string | null, specialite: string | null) {
   try {
-    const snapshot = await firestore.collection('medecins').ref.where('specialite', '==', specialite).where('localisation', '==', localisation).get();
+    const snapshot = await firestore.collection('medecin').ref.where('specialite', '==', specialite).where('localisation', '==', localisation).get();
 
     // Vérifier si snapshot est défini avant de l'utiliser
     if (snapshot) {
@@ -143,5 +144,50 @@ export async function getMedecinsByLocalisationAndSpecialite(firestore: AngularF
   }
 }
 
+export async function AddMedecin(firestore: AngularFirestore, app: FirebaseApp, nom: string, prenom: string, email: string, password: string, date: string, sexe: string, role: string, specialite:string,localisation:string) {
+  const medecin = {
+    nom: nom,
+    prenom: prenom,
+    email: email,
+    password: password,
+    date: date,
+    sexe: sexe,
+    role: role,
+    localisation: localisation,
+    specialite: specialite,
+  };
+
+  firestore.collection('medecin').add(medecin)
+    .then(() => {
+      console.log('Utilisateur ajouté avec succès à Firebase.');
+    })
+    .catch(error => {
+      console.error('Erreur lors de l\'ajout à Firebase :', error);
+    });
+}
 
 
+export function getMedecinByUid(firestore: AngularFirestore, uid: string){
+  try {
+    const medecinDoc = firestore.collection('medecins').doc(uid).snapshotChanges();
+
+    return medecinDoc.pipe(
+      map(snapshot => {
+        if (snapshot.payload.exists) {
+          const data = snapshot.payload.data() as MedecinData;
+          return data;
+        } else {
+          console.error('Le médecin avec l\'UID spécifié n\'existe pas.');
+          return null;
+        }
+      }),
+      catchError(error => {
+        console.error('Erreur lors de la récupération du médecin :', error);
+        throw error;
+      })
+    );
+  } catch (error) {
+    console.error('Erreur lors de la création de l\'observable :', error);
+    throw error;
+  }
+}

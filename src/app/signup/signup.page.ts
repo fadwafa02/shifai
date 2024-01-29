@@ -22,6 +22,7 @@ export class SignupPage implements OnInit {
   password = "";
   date = "";
   sexe = "";
+  role = "patient";
   constructor(private firestore: AngularFirestore, private toastController: ToastController) { }
 
   ngOnInit() {
@@ -40,7 +41,7 @@ export class SignupPage implements OnInit {
 
 try{
     // Utilisez la fonction AddUser du fichier firebaseConfig avec les paramètres du formulaire
-    AddUser(this.firestore,app ,this.familyName, this.name, this.email, this.password, this.date, this.sexe);
+    AddUser(this.firestore,app ,this.familyName, this.name, this.email, this.password, this.date, this.sexe ,this.role);
     this.presentToast('Registration successful!');
     // Réinitialisez les valeurs du formulaire après l'ajout réussi
     this.familyName = '';

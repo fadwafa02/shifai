@@ -16,8 +16,8 @@
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center; /* Pour centrer le texte à l'intérieur des boutons */
-    background-image: url('../../assets/image/profilIMG.png');
     background-size: cover;
+    z-index: 0;
 }
 
 /* Ajout d'une marge pour l'espace entre les boutons */
@@ -57,3 +57,32 @@ ion-button {
       background: #ccc;
     }
   }
+  .circle{
+    width: 100px;
+    height: 100px;
+    border-radius: 50% 50% 50% 50%;
+  }
+
+  
+  .page-footer {
+    position: fixed; /* pour rester fixe en bas de la page */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30%; /* Ajustez la hauteur selon vos besoins */
+    background-image: url('../../assets/image/1.png');
+    background-size: cover; /* Ajustez le redimensionnement de l'image selon vos besoins */
+    background-position: center center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1; /* Placez-le au-dessus du contenu de la page */
+    border-radius: 50% 50% 0% 0%;
+  }
+.white{
+    color: #faf9f9;
+}
+.primary{
+    color: #3880ff;
+}

@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-back-button text="Retour" routerLink="/homemedecin">Retour
+      </ion-back-button>
+    </ion-button>
+    <ion-title>Inscription</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="justify-content-center">
+     <ion-col>
+      <div class="ion-text-center">
+        <br><br><br><br>
+        <h4>Register Form medecin</h4>
+      </div><br><br><br><br>
+      <div class="form">
+        <form>
+        <ion-item>
+          <ion-input [(ngModel)]="familyName" placeholder="Enter your family name" type="text"  name="familyName" [ngModelOptions]="{standalone: true}">
+            <ion-icon name="person-outline"></ion-icon>
+          </ion-input>
+        </ion-item><br>
+        <ion-item>
+          <ion-input [(ngModel)]="name" placeholder="Enter your name" type="text"  name="name">
+            <ion-icon name="person-outline"></ion-icon>
+          </ion-input>
+        </ion-item><br>
+
+        <ion-item>
+          <ion-input [(ngModel)]="specialite" placeholder="Entrer votre specialite" type="text"  name="specialite">
+            <ion-icon name="clipboard-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <br>
+          <ion-item>
+            <ion-input [(ngModel)]="localisation" placeholder="Entrer votre ville" type="text"  name="localisation">
+              <ion-icon name="location-outline"></ion-icon>
+              </ion-input>
+            </ion-item>
+            <br>
+        <ion-item>
+          <ion-input [(ngModel)]="email" placeholder="Enter email" type="email"  name="email">
+            <ion-icon name="mail-outline"></ion-icon>
+          </ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+        <ion-input [(ngModel)]="password" placeholder="Enter password" type="password" spellcheck="false" name="password">
+          <ion-icon name="lock-closed-outline"></ion-icon></ion-input>
+        </ion-item>
+        <br>
+        <ion-item>
+          <ion-input [(ngModel)]="date" placeholder="Enter date" type="date"  name="date">
+            </ion-input>
+          </ion-item>
+          <br>
+        </form>
+      </div>
+      <label>
+        <input type="radio" [(ngModel)]="sexe"  name="sexe" value="Masculin"> Masculin
+      </label>
+      <label>
+        <input type="radio" [(ngModel)]="sexe"  name="sexe" value="Féminin"> Féminin
+      </label>
+      <br>
+      <div padding>
+        <br><br><br><br>
+        
+        <ion-button size="large" expand="block" (click)="AddUser()" >Register</ion-button>
+      </div>
+     </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
