@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Formulaire</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="fermerFormulaire.emit()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="myForm" >
+    <!-- Champs Prénom -->
+    <ion-item>
+      <ion-label >Prénom</ion-label>
+      <ion-input formControlName="prenom" label="Prénom"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label >Nom</ion-label>
+      <ion-input formControlName="nom" label="Nom"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label >Numéro</ion-label>
+      <ion-input formControlName="numero" label="Numéro"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label >Gmail</ion-label>
+      <ion-input formControlName="gmail" label="Gmail"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label >Password</ion-label>
+      <ion-input formControlName="password" type="password" label="Password"></ion-input>
+    </ion-item>
+    
+    
+    
+
+    <ion-button expand="full" type="submit">Soumettre</ion-button>
+  </form>
+</ion-content>

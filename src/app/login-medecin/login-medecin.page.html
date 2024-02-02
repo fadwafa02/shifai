@@ -2,19 +2,20 @@
   <ion-toolbar>
 
     <ion-button slot="start" (click)="back()">
-      retour
+      Retour
     </ion-button>
 
     <ion-title >Connexion</ion-title>
   </ion-toolbar>
 </ion-header>
   <ion-content>
+
     <ion-grid>
       <ion-row >
         <ion-col >
           <div class="ion-text-center">
             <br><br><br>
-            <h4>Login Form Medecin</h4>
+            <h4 class="warning">Login Form Medecin</h4>
           </div>
           <br><br><br><br><br><br>
           <div class="form">
@@ -38,8 +39,8 @@
           </div>
           <div>
             
-            <ion-button (click)="loginUser()" size="large" expand="block" shape="round">Login</ion-button>
-            <ion-button routerLink="/forgotpass" fill="clear">
+            <ion-button (click)="onLoginMedecin()" size="large" expand="block" shape="round" color="success">Login</ion-button>
+            <ion-button routerLink="/forgotpass" fill="clear" class="danger">
               Forgot Password
             </ion-button>
             

@@ -87,12 +87,13 @@ const routes: Routes = [
     path: 'homemedecin',
     loadChildren: () => import('./homemedecin/homemedecin.module').then( m => m.HomemedecinPageModule)
   },
+
   {
     path: 'home-avant-compte',
     loadChildren: () => import('./home-avant-compte/home-avant-compte.module').then( m => m.HomeAvantComptePageModule)
   },
   {
-    path: 'affiche-medecin',
+    path: 'affiche-medecin', 
     loadChildren: () => import('./affiche-medecin/affiche-medecin.module').then( m => m.AfficheMedecinPageModule)
   },
   {
@@ -102,6 +103,22 @@ const routes: Routes = [
   {
     path: 'signup-medecin',
     loadChildren: () => import('./signup-medecin/signup-medecin.module').then( m => m.SignupMedecinPageModule)
+  },
+  {
+    path: 'app-medecin',
+    loadChildren: () => import('./app-medecin/app-medecin.module').then( m => m.AppMedecinPageModule)
+  },
+  {
+    path: 'calender-medecin',
+    loadChildren: () => import('./calender-medecin/calender-medecin.module').then( m => m.CalenderMedecinPageModule)
+  },
+  {
+    path: 'parametre-med',
+    loadChildren: () => import('./parametre-med/parametre-med.module').then( m => m.ParametreMedPageModule)
+  },
+  {
+    path: 'parametre-secretaire',
+    loadChildren: () => import('./parametre-secretaire/parametre-secretaire.module').then( m => m.ParametreSecretairePageModule)
   },
 ];
 @NgModule({

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { medecinUid } from 'src/app/recherche-medecin/recherche-medecin.page';
 import { getMedecinByUid } from 'src/firebaseConfig';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Subscription } from 'rxjs';
+import { medecinUid } from 'src/app/recherche-medecin/recherche-medecin.page';
 
 @Component({
   selector: 'app-affiche-medecin',
@@ -10,19 +11,29 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 })
 export class AfficheMedecinPage implements OnInit {
 
-  medecin: any; 
+  medecin: any;
+  private medecinSubscription: Subscription | undefined ; 
+  medecinid ="" ;
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor( private firestore: AngularFirestore) {
+  }
 
   ngOnInit() {
-    const medecinUidValue = medecinUid;
-    this.fetchMedecin(medecinUidValue);  // Appelez la méthode fetchMedecin avec l'UID
+ 
+    this.medecinid = medecinUid;
+    console.log('Médecin UID récupéré :', this.medecinid);
+    if (this.medecinid) {
+      console.log('Médecin UID récupéré :', this.medecinid);
+      this.fetchMedecin(this.medecinid);
+    } else {
+      console.error('Erreur: medecinUid est undefined.');
+    }
   }
 
   async fetchMedecin(medecinUidValue: string) {
     try {
       this.medecin = await getMedecinByUid(this.firestore, medecinUidValue);
-      console.log('Médecin :', this.medecin);
+      console.log('Médecin récupéré :', this.medecin);
     } catch (error) {
       console.error('Erreur lors de la récupération du médecin :', error);
     }

@@ -22,6 +22,9 @@ import { EventService } from 'src/app/event.service';
   styleUrls: ['medicament-form.component.scss']
 })
 
+
+
+
 export class MedicamentFormComponent {
 
     uid = userUid;
@@ -29,6 +32,7 @@ export class MedicamentFormComponent {
     dosage= 0;
     prises = [{ label: 'Matin', checked: false },{ label: 'Midi', checked: false },{ label: 'Soir', checked: false }];
 
+    
 
   constructor(private firestore: AngularFirestore, private toastController: ToastController, private modalController: ModalController, private eventService: EventService) {}
 
@@ -69,6 +73,14 @@ export class MedicamentFormComponent {
 
 
 }
+
+// Dans un fichier approprié, par exemple medicament.model.ts
+export interface Medicament {
+  nom: string;
+  dosage: number;
+  prise: { label: string; checked: boolean }[];
+}
+
 
 @NgModule({
   declarations: [MedicamentFormComponent],

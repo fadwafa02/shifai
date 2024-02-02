@@ -2,7 +2,7 @@
 import { initializeApp, FirebaseOptions, FirebaseApp } from 'firebase/app';
 import { getAnalytics } from 'firebase/analytics';
 import { getAuth, signInWithEmailAndPassword, Auth, User, UserCredential } from 'firebase/auth';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection, CollectionReference, DocumentData, QuerySnapshot } from '@angular/fire/compat/firestore';
 import { NgZone } from '@angular/core';
 import { ɵAngularFireSchedulers, ɵAppCheckInstances, ɵZoneScheduler } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/compat/auth/auth';
@@ -111,6 +111,7 @@ export async function getMedicamentsByUid(firestore: AngularFirestore, uid: stri
 // Exemple d'interface pour la structure des données des médecins
 interface MedecinData {
   // Définissez les champs nécessaires
+  id : string ;
   nom: string;
   prenom:string;
   localisation:string;
@@ -130,7 +131,7 @@ export async function getMedecinsByLocalisationAndSpecialite(firestore: AngularF
       // Convertir le snapshot en tableau de médecins
       const medecins: MedecinData[] = snapshot.docs.map(doc => {
         const data = doc.data() as MedecinData;
-        return { id: doc.id, ...data };
+        return { uid: doc.id, ...data };
       });
 
       return medecins;
@@ -144,7 +145,7 @@ export async function getMedecinsByLocalisationAndSpecialite(firestore: AngularF
   }
 }
 
-export async function AddMedecin(firestore: AngularFirestore, app: FirebaseApp, nom: string, prenom: string, email: string, password: string, date: string, sexe: string, role: string, specialite:string,localisation:string) {
+export async function AddMedecin(firestore: AngularFirestore, app: FirebaseApp, nom: string, prenom: string, email: string, password: string, date: string, sexe: string, role: string, specialite:string,localisation:string ) {
   const medecin = {
     nom: nom,
     prenom: prenom,
@@ -155,6 +156,7 @@ export async function AddMedecin(firestore: AngularFirestore, app: FirebaseApp, 
     role: role,
     localisation: localisation,
     specialite: specialite,
+
   };
 
   firestore.collection('medecin').add(medecin)
@@ -167,27 +169,73 @@ export async function AddMedecin(firestore: AngularFirestore, app: FirebaseApp, 
 }
 
 
-export function getMedecinByUid(firestore: AngularFirestore, uid: string){
-  try {
-    const medecinDoc = firestore.collection('medecins').doc(uid).snapshotChanges();
+export async function getMedecinByUid(firestore: AngularFirestore, uid: string) {
+  const snapshot = await firestore.collection('medecin').ref.where('uid', '==', uid).get();
+  if (snapshot) {
+    // Convertir le snapshot en tableau de médecins
+    const medecins: MedecinData[] = snapshot.docs.map(doc => {
+      const data = doc.data() as MedecinData;
+      return { uid: doc.id, ...data };
+    });
 
-    return medecinDoc.pipe(
-      map(snapshot => {
-        if (snapshot.payload.exists) {
-          const data = snapshot.payload.data() as MedecinData;
-          return data;
-        } else {
-          console.error('Le médecin avec l\'UID spécifié n\'existe pas.');
-          return null;
+    return medecins;
+      } else {
+        console.log('Aucun médecin trouvé pour cet UID :', uid);
+        return null; // Ou renvoyez un objet vide, selon vos besoins
+      }
+    }
+
+    export async function loginMedecin(firestore: AngularFirestore, email: string, password: string): Promise<{ medecinData: any, uid: string } | null> {
+      try {
+        // Recherchez le médecin dans la base de données avec l'email fourni
+        const medecinCollection: CollectionReference<DocumentData> = firestore.collection('medecin').ref as CollectionReference<DocumentData>;
+        const medecinQuery: QuerySnapshot<DocumentData> = await medecinCollection.where('email', '==', email).get();
+    
+        if (medecinQuery.size === 1) {
+          // Vérifiez le mot de passe (vous pouvez utiliser une bibliothèque de hachage appropriée)
+          const medecinData = medecinQuery.docs[0].data() as { password?: string };
+          const uid = medecinQuery.docs[0].id;
+    
+          if (medecinData && medecinData.password === password) {
+            console.log('Connexion réussie en tant que médecin.');
+            return { medecinData, uid }; // Authentification réussie, renvoie les informations du médecin et son UID
+          }
         }
-      }),
-      catchError(error => {
-        console.error('Erreur lors de la récupération du médecin :', error);
-        throw error;
-      })
-    );
-  } catch (error) {
-    console.error('Erreur lors de la création de l\'observable :', error);
-    throw error;
-  }
-}
+    
+        console.error('Identifiants invalides.');
+        return null; // Authentification échouée
+    
+      } catch (error) {
+        console.error('Erreur lors de la connexion du médecin :', error);
+        throw error; // Vous pouvez gérer l'erreur ici ou la laisser remonter
+      }
+    }
+  
+    export const medecinUid = { uid: '' };
+
+    export async function ajouterSecretaire(firestore: AngularFirestore, secretarieData: any): Promise<void> {
+      try {
+        // Ajoutez votre logique pour ajouter les données du formulaire à la collection 'secretaire'
+        // Utilisez firestore.collection('secretaire') pour accéder à la collection 'secretaire' dans Firebase
+        await firestore.collection('secretaire').add(secretarieData);
+    
+        console.log('Secrétaire ajoutée avec succès à la base de données.');
+      } catch (error) {
+        console.error('Erreur lors de l\'ajout du secrétaire à la base de données :', error);
+        throw error; // Vous pouvez gérer l'erreur ici ou la laisser remonter
+      }
+    }
+
+    export const getSecretaireByUid = (firestore: AngularFirestore, uid: string): Observable<any> => {
+      return firestore.collection('secretaires').doc(uid).snapshotChanges().pipe(
+        map(docChange => {
+          const data = docChange.payload.data();
+          if (data) {
+            return data;
+            console.log(data);
+          } else {
+            throw new Error('Secrétaire non trouvé');
+          }
+        })
+      );
+    };

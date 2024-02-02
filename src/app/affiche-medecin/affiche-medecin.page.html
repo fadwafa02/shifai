@@ -1,20 +1,18 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons>
+      <ion-button slot="start" routerLink="/recherche-medecin">Retour</ion-button>
+    </ion-buttons>
     <ion-title>affiche-Medecin</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
+<ion-content [fullscreen]="true">
+  <ion-card *ngIf="medecin">
     <ion-card-header>
       {{ medecin.nom }} {{ medecin.prenom }}
     </ion-card-header>
-    <ion-card-content>
-      <p>Localisation: {{ medecin.localisation }}</p>
-      <p>Spécialité: {{ medecin.specialite }}</p>
-      <!-- Ajoutez ici d'autres informations sur le médecin -->
-    </ion-card-content>
+    <!-- ... autres éléments du ion-card ... -->
   </ion-card>
-  <br><br><br><br><br><br><br>
-  <p>bonjour</p>
+
 </ion-content>
